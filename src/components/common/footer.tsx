@@ -6,7 +6,7 @@ import { MapPin, Phone, Mail, Heart } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-surface-subtle/70 pb-20 pt-12 md:pb-12 text-sm shadow-none">
+    <footer className="bg-[#FAFCFA] pb-20 pt-14 md:pb-12 text-sm shadow-none">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           {/* Brand and identity with official Logo */}
@@ -18,6 +18,7 @@ export function Footer() {
                 width={190}
                 height={65}
                 className="h-9 w-auto object-contain"
+                priority
               />
             </div>
             <p className="text-sm text-text-secondary max-w-md leading-relaxed font-normal">
@@ -51,22 +52,22 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-text-secondary font-normal">
               <li>
                 <Link href="/" className="hover:text-primary transition-colors">
-                  Beranda (Waktu Sholat & Warta)
+                  Beranda
                 </Link>
               </li>
               <li>
-                <Link href="/etalase" className="hover:text-primary transition-colors">
-                  Etalase UMKM & Lumbung Pangan
+                <Link href="/umkm" className="hover:text-primary transition-colors">
+                  UMKM Warga Jamaah
                 </Link>
               </li>
               <li>
                 <Link href="/transparansi-kas" className="hover:text-primary transition-colors">
-                  Transparansi & Pembukuan Kas
+                  Transparansi Kas
                 </Link>
               </li>
               <li>
                 <Link href="/tentang" className="hover:text-primary transition-colors">
-                  Tentang DKM & Layanan Cepat
+                  Tentang Kami
                 </Link>
               </li>
             </ul>
@@ -77,7 +78,7 @@ export function Footer() {
             <h4 className="font-heading text-xs font-semibold uppercase tracking-wider text-text-primary">
               Rekening Kas Infaq
             </h4>
-            <div className="rounded-lg border border-border bg-surface p-3.5 space-y-1">
+            <div className="rounded-2xl bg-surface-subtle p-4 space-y-1">
               <p className="text-xs text-text-muted font-normal">{siteConfig.treasury.bankName}</p>
               <p className="font-mono text-sm font-semibold text-text-primary">
                 {siteConfig.treasury.accountNumber}
@@ -93,7 +94,7 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-text-muted font-normal">
+        <div className="mt-12 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-text-muted font-normal">
           <p>© {new Date().getFullYear()} {siteConfig.name}. Khidmah untuk umat.</p>
           <p className="flex items-center gap-1">
             <span>Dikelola dengan ikhlas oleh DKM & Jamaah</span>

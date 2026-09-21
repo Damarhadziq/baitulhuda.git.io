@@ -34,9 +34,9 @@ export function Navbar() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full border-b border-border bg-surface/95 backdrop-blur-sm shadow-none">
+      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md shadow-none">
         {/* Top micro-bar for date & calmness reminder */}
-        <div className="hidden border-b border-border/60 bg-surface-subtle py-1.5 px-4 text-xs text-text-secondary sm:block">
+        <div className="hidden bg-surface-subtle/70 py-1.5 px-4 text-xs text-text-secondary sm:block">
           <div className="mx-auto flex max-w-6xl items-center justify-between">
             <div className="flex items-center gap-2">
               <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
@@ -47,7 +47,7 @@ export function Navbar() {
                 <Compass className="h-3 w-3 text-accent-gold" />
                 <span className="font-normal text-xs">Arah Kiblat: 294.8° Barat Laut</span>
               </span>
-              <span className="text-border">|</span>
+              <span className="text-text-muted/40">•</span>
               <span className="font-normal text-xs">{siteConfig.address.city}</span>
             </div>
           </div>
@@ -80,10 +80,10 @@ export function Navbar() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-lg px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                  className={`rounded-full px-4 py-1.5 text-sm transition-all ${
                     isActive
-                      ? 'bg-primary-pastel text-primary'
-                      : 'text-text-secondary hover:bg-surface-subtle hover:text-text-primary'
+                      ? 'bg-primary-pastel text-primary font-medium'
+                      : 'text-text-muted hover:text-text-primary hover:bg-surface-subtle font-normal'
                   }`}
                 >
                   {item.label}
@@ -120,7 +120,7 @@ export function Navbar() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-surface text-text-primary md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-surface-subtle text-text-primary md:hidden"
               aria-label="Buka Menu"
             >
               {mobileMenuOpen ? (
@@ -134,7 +134,7 @@ export function Navbar() {
 
         {/* Mobile Drawer Menu */}
         {mobileMenuOpen && (
-          <div className="border-t border-border bg-surface px-4 py-4 md:hidden">
+          <div className="bg-white px-4 py-4 md:hidden shadow-none">
             <nav className="flex flex-col space-y-1">
               {siteConfig.navigation.map((item) => {
                 const isActive = pathname === item.href;
@@ -143,10 +143,10 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    className={`rounded-xl px-3.5 py-2 text-sm transition-colors ${
                       isActive
-                        ? 'bg-primary-pastel text-primary'
-                        : 'text-text-primary hover:bg-surface-subtle'
+                        ? 'bg-primary-pastel text-primary font-medium'
+                        : 'text-text-muted hover:text-text-primary hover:bg-surface-subtle font-normal'
                     }`}
                   >
                     {item.label}
@@ -154,7 +154,7 @@ export function Navbar() {
                 );
               })}
             </nav>
-            <div className="mt-4 pt-3 border-t border-border flex flex-col gap-2">
+            <div className="mt-4 pt-3 flex flex-col gap-2">
               <Button asChild variant="outline" size="mobile" className="w-full justify-center">
                 <a href={waUrl} target="_blank" rel="noopener noreferrer">
                   <MessageCircle className="h-4 w-4 text-primary mr-1.5" />
@@ -178,8 +178,8 @@ export function Navbar() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="my-2 flex flex-col items-center justify-center rounded-xl border border-border bg-surface p-4">
-            <div className="flex h-44 w-44 items-center justify-center rounded-lg border border-border bg-white text-primary">
+          <div className="my-2 flex flex-col items-center justify-center rounded-2xl bg-surface-subtle p-5">
+            <div className="flex h-44 w-44 items-center justify-center rounded-xl bg-white text-primary">
               <QrCode className="h-36 w-36 text-primary" />
             </div>
             <p className="mt-3 text-xs font-semibold text-text-primary">
@@ -190,8 +190,8 @@ export function Navbar() {
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-surface-subtle p-3 text-left text-xs space-y-1">
-            <span className="text-text-muted">Nomor Rekening Resmi:</span>
+          <div className="rounded-xl bg-surface-subtle p-3.5 text-left text-xs space-y-1.5">
+            <span className="text-text-muted text-[11px]">Nomor Rekening Resmi:</span>
             <div className="flex justify-between items-center">
               <span className="font-medium text-text-primary">{siteConfig.treasury.bankName}</span>
               <span className="font-mono font-semibold text-primary">{siteConfig.treasury.accountNumber}</span>

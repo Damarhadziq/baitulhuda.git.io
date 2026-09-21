@@ -9,22 +9,22 @@ const badgeVariants = cva(
       variant: {
         // Pastel green wash (standard active tag/category)
         default:
-          'bg-primary-pastel text-primary border border-primary/10',
+          'bg-primary-pastel text-primary',
         // Pure solid primary
         solid:
-          'bg-primary text-white border-transparent',
-        // Hairline outline
+          'bg-primary text-white',
+        // Hairline outline replaced with subtle chip
         outline:
-          'border border-border text-text-secondary bg-surface',
+          'text-text-secondary bg-surface-subtle',
         // Subtle muted
         subtle:
-          'bg-surface-subtle text-text-secondary border border-border/50',
+          'bg-surface-subtle text-text-secondary',
         // Warm gold (prayer/call to prayer/special badge)
         gold:
-          'bg-accent-gold-subtle text-[#A06E39] border border-accent-gold/20',
+          'bg-accent-gold-subtle text-[#A06E39]',
         // Muted clay red (lelayu/duka cita alert)
         destructive:
-          'bg-destructive-subtle text-destructive border border-destructive/20',
+          'bg-destructive-subtle text-destructive',
       },
     },
     defaultVariants: {

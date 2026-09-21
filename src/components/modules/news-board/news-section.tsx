@@ -127,10 +127,11 @@ export function NewsSection() {
       </div>
 
       {/* Urgent Banner (Pinned Post) */}
+      {/* Urgent Banner (Pinned Post) */}
       {urgentPost && activeTab !== 'kajian' && activeTab !== 'pengumuman' && (
-        <div className="rounded-xl border border-primary/20 bg-primary-pastel p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-none">
+        <div className="rounded-2xl bg-primary-pastel/60 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-none">
           <div className="flex items-start sm:items-center gap-3">
-            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-primary text-white">
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-white">
               <Volume2 className="h-4 w-4" />
             </div>
             <div>
@@ -152,7 +153,7 @@ export function NewsSection() {
             variant="outline"
             size="sm"
             onClick={() => setSelectedNews(urgentPost)}
-            className="self-end sm:self-auto text-xs font-medium border-primary/30 text-primary hover:bg-surface"
+            className="self-end sm:self-auto text-xs font-medium text-primary hover:bg-white rounded-full px-4"
           >
             <span>Rincian Warta</span>
             <ArrowRight className="h-3 w-3 ml-1" />
@@ -173,27 +174,25 @@ export function NewsSection() {
             );
 
             return (
-              <Card
+              <div
                 key={item.id}
-                className="border border-destructive/30 bg-destructive-subtle/30 flex flex-col justify-between"
+                className="rounded-2xl bg-[#FCF5F5] flex flex-col justify-between p-5"
               >
                 <div>
-                  <CardHeader className="pb-3">
-                    <div className="flex items-center justify-between">
-                      <Badge variant="destructive" className="font-medium text-[11px]">
-                        Lelayu Warga
-                      </Badge>
-                      <span className="text-[11px] text-text-muted font-normal">{item.date}</span>
-                    </div>
-                    <CardTitle className="mt-2 text-base font-semibold leading-snug text-text-primary">
-                      {item.deceasedName}
-                    </CardTitle>
-                    <p className="text-xs font-medium text-text-secondary mt-0.5">
-                      {item.binBinti} (Usia {item.age} tahun)
-                    </p>
-                  </CardHeader>
+                  <div className="flex items-center justify-between">
+                    <Badge variant="destructive" className="font-medium text-[11px]">
+                      Lelayu Warga
+                    </Badge>
+                    <span className="text-[11px] text-text-muted font-normal">{item.date}</span>
+                  </div>
+                  <h3 className="mt-3 text-base font-semibold leading-snug text-text-primary">
+                    {item.deceasedName}
+                  </h3>
+                  <p className="text-xs font-medium text-text-secondary mt-0.5">
+                    {item.binBinti} (Usia {item.age} tahun)
+                  </p>
 
-                  <CardContent className="space-y-2 text-xs text-text-secondary font-normal">
+                  <div className="mt-4 space-y-2 text-xs text-text-secondary font-normal">
                     <p className="flex items-start gap-1.5">
                       <Clock className="h-3.5 w-3.5 text-destructive flex-shrink-0 mt-0.5" />
                       <span>{item.funeralTime}</span>
@@ -202,16 +201,16 @@ export function NewsSection() {
                       <MapPin className="h-3.5 w-3.5 text-destructive flex-shrink-0 mt-0.5" />
                       <span>{item.address}</span>
                     </p>
-                  </CardContent>
+                  </div>
                 </div>
 
-                <div className="p-5 pt-0 border-t border-destructive/20 mt-2 flex items-center justify-between gap-2">
+                <div className="pt-4 mt-3 flex items-center justify-between gap-2">
                   {item.mapUrl && (
                     <Button
                       asChild
                       variant="outline"
                       size="sm"
-                      className="text-xs font-medium border-border/80 text-text-secondary hover:text-text-primary"
+                      className="text-xs font-medium text-text-secondary hover:text-text-primary rounded-full px-3.5 bg-white/70"
                     >
                       <a href={item.mapUrl} target="_blank" rel="noopener noreferrer">
                         <MapPin className="h-3 w-3 mr-1" />
@@ -223,7 +222,7 @@ export function NewsSection() {
                     asChild
                     variant="outline"
                     size="sm"
-                    className="text-xs font-medium border-destructive/30 text-destructive hover:bg-destructive-subtle flex-1 justify-center"
+                    className="text-xs font-medium text-destructive hover:bg-white flex-1 justify-center rounded-full px-3.5 bg-white/70"
                   >
                     <a href={waTakziahUrl} target="_blank" rel="noopener noreferrer">
                       <Share2 className="h-3 w-3 mr-1" />
@@ -231,34 +230,32 @@ export function NewsSection() {
                     </a>
                   </Button>
                 </div>
-              </Card>
+              </div>
             );
           }
 
           // Regular News & Kajian Card
           return (
-            <Card key={item.id} className="flex flex-col justify-between">
+            <div key={item.id} className="rounded-2xl bg-surface-subtle/70 flex flex-col justify-between overflow-hidden">
               <div>
                 {/* Thumbnail header */}
-                <div className="h-36 w-full rounded-t-xl bg-surface-subtle border-b border-border flex items-center justify-center text-text-muted">
+                <div className="h-36 w-full bg-surface-subtle flex items-center justify-center text-text-muted">
                   <BookOpen className="h-7 w-7 text-primary/40" />
                 </div>
-                <CardHeader className="pb-2">
+                <div className="p-5 pb-2">
                   <div className="flex items-center justify-between">
                     <Badge variant={item.category === 'Kajian' ? 'default' : 'subtle'} className="font-medium text-[11px]">
                       {item.category}
                     </Badge>
                     <span className="text-[11px] text-text-muted font-normal">{item.date}</span>
                   </div>
-                  <CardTitle className="mt-2 text-base font-semibold leading-snug text-text-primary line-clamp-2">
+                  <h3 className="mt-2 text-base font-semibold leading-snug text-text-primary line-clamp-2">
                     {item.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-xs text-text-secondary line-clamp-2 leading-relaxed font-normal">
+                  </h3>
+                  <p className="mt-2 text-xs text-text-secondary line-clamp-2 leading-relaxed font-normal">
                     {item.excerpt}
                   </p>
-                </CardContent>
+                </div>
               </div>
 
               <div className="p-5 pt-0">
@@ -266,13 +263,13 @@ export function NewsSection() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setSelectedNews(item)}
-                  className="w-full justify-between text-xs font-medium text-primary hover:bg-primary-pastel"
+                  className="w-full justify-between text-xs font-medium text-primary hover:bg-primary-pastel/60 rounded-full px-3"
                 >
                   <span>Baca Selengkapnya</span>
                   <ArrowRight className="h-3 w-3" />
                 </Button>
               </div>
-            </Card>
+            </div>
           );
         })}
       </div>
@@ -304,7 +301,7 @@ export function NewsSection() {
             </DialogHeader>
 
             {selectedNews.category === 'Kabar Duka (Lelayu)' && (
-              <div className="rounded-lg border border-border bg-surface-subtle p-3.5 space-y-1.5 text-xs text-text-secondary font-normal">
+              <div className="rounded-2xl bg-surface-subtle p-4 space-y-1.5 text-xs text-text-secondary font-normal">
                 <p>
                   <strong className="font-semibold text-text-primary">Nama Almarhum/ah:</strong> {selectedNews.deceasedName} {selectedNews.binBinti}
                 </p>
@@ -321,12 +318,12 @@ export function NewsSection() {
               <p>{selectedNews.content}</p>
             </div>
 
-            <div className="pt-2 border-t border-border flex justify-end">
+            <div className="pt-2 flex justify-end">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setSelectedNews(null)}
-                className="text-xs font-medium"
+                className="text-xs font-medium rounded-full px-4"
               >
                 Tutup Warta
               </Button>

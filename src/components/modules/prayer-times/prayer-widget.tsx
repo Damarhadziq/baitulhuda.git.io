@@ -21,11 +21,13 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
   const [currentSchedule] = React.useState<DailyPrayerSchedule>(schedule);
   const [currentTimeStr, setCurrentTimeStr] = React.useState<string>('');
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [mounted, setMounted] = React.useState(false);
   const [nextInfo, setNextInfo] = React.useState(() =>
     calculateNextPrayer(schedule)
   );
 
   React.useEffect(() => {
+    setMounted(true);
     const update = () => {
       const now = new Date();
       setCurrentTimeStr(
@@ -56,9 +58,9 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
   ];
 
   return (
-    <div className="w-full rounded-xl border border-border bg-surface p-5 sm:p-6 shadow-none">
+    <div className="w-full rounded-2xl bg-surface-subtle/60 p-5 sm:p-6 shadow-none">
       {/* Top Header: Clock + Next Prayer Indicator */}
-      <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:items-center sm:justify-between border-b border-border/80">
+      <div className="flex flex-col gap-3 pb-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="font-heading text-lg font-semibold text-text-primary">
@@ -77,39 +79,42 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
         <div className="flex flex-wrap items-center gap-2.5">
           {/* Subtle live clock */}
           {currentTimeStr && (
-            <div className="flex items-center gap-1.5 rounded-lg border border-border bg-surface-subtle px-2.5 py-1 text-xs text-text-secondary font-mono font-normal">
+            <div
+              suppressHydrationWarning
+              className="flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs text-text-secondary font-mono font-normal"
+            >
               <Clock className="h-3 w-3 text-text-muted" />
-              <span>{currentTimeStr} WIB</span>
+              <span suppressHydrationWarning>{currentTimeStr} WIB</span>
             </div>
           )}
 
           {/* Next prayer pill with delicate, non-oversized dot indicator */}
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary-pastel px-3 py-1 text-xs font-medium text-primary border border-primary/10">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-primary-pastel px-3.5 py-1 text-xs font-medium text-primary">
             {/* Small delicate pulse dot (h-1.5 w-1.5) */}
             <span className="relative flex h-1.5 w-1.5">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-70" />
               <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-primary" />
             </span>
             <span>Menuju {nextInfo.nextPrayer.name}:</span>
-            <span className="font-mono font-semibold tracking-tight">
-              {nextInfo.timeRemaining}
+            <span suppressHydrationWarning className="font-mono font-semibold tracking-tight">
+              {mounted ? nextInfo.timeRemaining : nextInfo.timeRemaining}
             </span>
           </div>
         </div>
       </div>
 
       {/* Horizontal 5-Times Prayer Strip */}
-      <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-6 sm:gap-3">
+      <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-6 sm:gap-3">
         {prayerItems.map((item) => {
           const isNext = item.isNext;
 
           return (
             <div
               key={item.key}
-              className={`flex flex-col items-center justify-center rounded-lg p-3 text-center transition-all ${
+              className={`flex flex-col items-center justify-center rounded-xl p-3 text-center transition-all ${
                 isNext
-                  ? 'bg-primary-pastel border border-primary text-primary'
-                  : 'bg-surface border border-border text-text-primary hover:bg-surface-subtle/60'
+                  ? 'bg-primary-pastel text-primary'
+                  : 'bg-white text-text-primary hover:bg-white/80'
               }`}
             >
               <span
@@ -145,9 +150,9 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
       </div>
 
       {/* Action Footer: Monthly Schedule Dialog Trigger */}
-      <div className="mt-4 pt-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t border-border/60 text-xs text-text-muted font-normal">
+      <div className="mt-5 pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs text-text-muted font-normal">
         <span className="flex items-center gap-1.5">
-          <Info className="h-3 w-3 text-primary" />
+          <Info className="h-3.5 w-3.5 text-primary" />
           <span>Iqomah dikumandangkan 10-15 menit setelah adzan masuk waktu.</span>
         </span>
 
@@ -155,9 +160,9 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
           variant="outline"
           size="sm"
           onClick={() => setDialogOpen(true)}
-          className="self-start sm:self-auto text-xs font-medium"
+          className="self-start sm:self-auto text-xs font-medium rounded-full px-3.5"
         >
-          <Calendar className="h-3.5 w-3.5 mr-1 text-primary" />
+          <Calendar className="h-3.5 w-3.5 mr-1.5 text-primary" />
           <span>Buka Jadwal Bulanan</span>
         </Button>
       </div>
@@ -174,9 +179,9 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="rounded-lg border border-border overflow-x-auto">
+          <div className="rounded-2xl bg-surface-subtle/50 p-2 overflow-x-auto">
             <table className="w-full text-xs">
-              <thead className="bg-surface-subtle border-b border-border text-text-muted font-medium">
+              <thead className="text-text-muted font-medium">
                 <tr>
                   <th className="py-2.5 px-3 text-left">Tanggal</th>
                   <th className="py-2.5 px-3 text-center">Subuh</th>
@@ -187,10 +192,10 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
                   <th className="py-2.5 px-3 text-center">Isya</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border font-mono text-text-primary">
+              <tbody className="font-mono text-text-primary">
                 {monthlySimulated.map((row, i) => (
-                  <tr key={i} className={i === 0 ? 'bg-primary-pastel/40' : 'hover:bg-surface-subtle/40'}>
-                    <td className="py-2 px-3 font-sans font-medium text-text-primary">
+                  <tr key={i} className={`rounded-lg transition-colors ${i === 0 ? 'bg-primary-pastel/60' : 'hover:bg-white/80'}`}>
+                    <td className="py-2 px-3 font-sans font-medium text-text-primary rounded-l-lg">
                       {row.tgl} {i === 0 && <span className="text-[10px] text-primary font-normal">(Hari Ini)</span>}
                     </td>
                     <td className="py-2 px-3 text-center">{row.subuh}</td>
@@ -198,7 +203,7 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
                     <td className="py-2 px-3 text-center">{row.dzuhur}</td>
                     <td className="py-2 px-3 text-center">{row.ashar}</td>
                     <td className="py-2 px-3 text-center font-medium text-primary">{row.maghrib}</td>
-                    <td className="py-2 px-3 text-center">{row.isya}</td>
+                    <td className="py-2 px-3 text-center rounded-r-lg">{row.isya}</td>
                   </tr>
                 ))}
               </tbody>

@@ -14,9 +14,9 @@ const buttonVariants = cva(
         // 2. Ultra-soft pastel green wash with pine text
         pastel:
           'bg-primary-pastel text-primary hover:bg-[#DDE9E1] active:bg-[#D2E2D7]',
-        // 3. 1px hairline border with crisp white surface
+        // 3. Borderless subtle surface button
         outline:
-          'border border-border bg-surface text-text-primary hover:bg-surface-subtle active:bg-[#EBEBE6]',
+          'bg-surface-subtle text-text-primary hover:bg-[#EBEFEA] active:bg-[#E2E8E1]',
         // 4. Ghost / subtle hover
         ghost:
           'text-text-primary hover:bg-surface-subtle active:bg-[#EBEBE6]',

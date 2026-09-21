@@ -21,12 +21,12 @@ export function TreasuryTeaser() {
 
   return (
     <section aria-labelledby="transparansi-teaser-heading" className="space-y-4">
-      <div className="rounded-xl border border-border bg-surface p-6 sm:p-7 shadow-none">
+      <div className="rounded-3xl bg-surface-subtle/70 p-6 sm:p-8 shadow-none">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           {/* Left Summary Info */}
           <div className="space-y-2 max-w-xl">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-pastel text-primary">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
                 <Wallet className="h-4 w-4" />
               </div>
               <h2
@@ -45,7 +45,7 @@ export function TreasuryTeaser() {
           </div>
 
           {/* Center/Right: Balance and Action */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 border-t lg:border-t-0 lg:border-l border-border pt-4 lg:pt-0 lg:pl-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2 lg:pt-0">
             <div className="space-y-0.5">
               <span className="text-xs text-text-muted font-normal">Saldo Kas Aktif Berjalan:</span>
               <p className="font-mono text-2xl font-semibold text-primary">
@@ -60,7 +60,7 @@ export function TreasuryTeaser() {
               variant="default"
               size="default"
               onClick={() => setQrisOpen(true)}
-              className="text-xs font-medium self-stretch sm:self-auto"
+              className="text-xs font-medium self-stretch sm:self-auto rounded-full px-5"
             >
               <QrCode className="h-3.5 w-3.5 mr-1.5" />
               <span>Infaq QRIS</span>
@@ -69,13 +69,13 @@ export function TreasuryTeaser() {
         </div>
 
         {/* Clean Link to Full Report */}
-        <div className="mt-5 pt-4 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
+        <div className="mt-6 pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
           <div className="flex items-center gap-4 text-text-secondary font-normal">
             <span className="flex items-center gap-1">
               <ArrowDownRight className="h-3.5 w-3.5 text-primary" />
               <span>Penerimaan Bulan Ini: <strong>{formatRupiah(8450000)}</strong></span>
             </span>
-            <span className="text-border">|</span>
+            <span className="text-text-muted/40">•</span>
             <span className="flex items-center gap-1">
               <ArrowUpRight className="h-3.5 w-3.5 text-destructive" />
               <span>Pengeluaran: <strong>{formatRupiah(3420000)}</strong></span>
@@ -104,8 +104,8 @@ export function TreasuryTeaser() {
             </DialogDescription>
           </DialogHeader>
 
-          <div className="my-2 flex flex-col items-center justify-center rounded-xl border border-border bg-surface p-4">
-            <div className="flex h-44 w-44 items-center justify-center rounded-lg border border-border bg-white text-primary">
+          <div className="my-2 flex flex-col items-center justify-center rounded-2xl bg-surface-subtle p-5">
+            <div className="flex h-44 w-44 items-center justify-center rounded-xl bg-white text-primary">
               <QrCode className="h-36 w-36 text-primary" />
             </div>
             <p className="mt-3 text-xs font-semibold text-text-primary">
@@ -116,7 +116,7 @@ export function TreasuryTeaser() {
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-surface-subtle p-3 text-left text-xs space-y-1">
+          <div className="rounded-xl bg-surface-subtle p-3.5 text-left text-xs space-y-1">
             <span className="text-text-muted font-normal">Transfer Manual Rekening BSI:</span>
             <p className="font-mono text-sm font-semibold text-primary">
               {siteConfig.treasury.accountNumber}

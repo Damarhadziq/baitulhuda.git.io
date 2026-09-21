@@ -61,12 +61,12 @@ const tasks: VolunteerTask[] = [
     description: 'Memastikan karpet wangi, tempat wudhu bersih tidak licin, dan pendingin ruangan terawat.',
   },
   {
-    id: 'pangan',
-    title: 'Penyaluran Lumbung Pangan Sembako Dhuafa',
+    id: 'sosial',
+    title: 'Penyaluran Bantuan Sosial & Santunan Dhuafa',
     category: 'Sosial Umat',
     needed: 'Dibutuhkan 2 orang',
     schedule: 'Pekan terakhir setiap bulan',
-    description: 'Membantu penimbangan beras sedekah dan pendistribusian paket pangan langsung ke rumah warga lansia.',
+    description: 'Membantu pendataan penerima santunan dan pendistribusian paket bantuan langsung ke rumah warga lansia.',
   },
 ];
 
@@ -117,32 +117,32 @@ export function VolunteerSection() {
 
       {/* 3 Mini Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="rounded-xl border border-border bg-surface p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Relawan Aktif</span>
             <p className="font-semibold text-lg text-primary mt-0.5">28 Relawan</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-pastel text-primary">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
             <Users className="h-4 w-4" />
           </div>
         </div>
 
-        <div className="rounded-xl border border-border bg-surface p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Tugas Terpenuhi</span>
             <p className="font-semibold text-lg text-primary mt-0.5">14 Amanah</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-pastel text-primary">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
             <CheckCircle2 className="h-4 w-4" />
           </div>
         </div>
 
-        <div className="rounded-xl border border-border bg-surface p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Kebutuhan Terbuka</span>
             <p className="font-semibold text-lg text-primary mt-0.5">4 Posisi</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-pastel text-primary">
+          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
             <HeartHandshake className="h-4 w-4" />
           </div>
         </div>

@@ -34,13 +34,13 @@ export const siteConfig = {
   // STRICT ONLY 4 NAVIGATION ITEMS
   navigation: [
     { label: 'Beranda', href: '/' },
-    { label: 'Etalase & Lumbung', href: '/etalase' },
+    { label: 'UMKM', href: '/umkm' },
     { label: 'Transparansi Kas', href: '/transparansi-kas' },
     { label: 'Tentang Kami', href: '/tentang' },
   ],
   mobileNav: [
     { label: 'Beranda', href: '/', icon: 'Home' },
-    { label: 'Etalase', href: '/etalase', icon: 'ShoppingBag' },
+    { label: 'UMKM', href: '/umkm', icon: 'Store' },
     { label: 'Kas', href: '/transparansi-kas', icon: 'Wallet' },
     { label: 'Tentang', href: '/tentang', icon: 'Info' },
   ],

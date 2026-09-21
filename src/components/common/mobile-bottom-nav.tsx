@@ -3,11 +3,11 @@
 import * as React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, ShoppingBag, Wallet, Info } from 'lucide-react';
+import { Home, Store, Wallet, Info } from 'lucide-react';
 
 const navItems = [
   { label: 'Beranda', href: '/', icon: Home },
-  { label: 'Etalase', href: '/etalase', icon: ShoppingBag },
+  { label: 'UMKM', href: '/umkm', icon: Store },
   { label: 'Kas', href: '/transparansi-kas', icon: Wallet },
   { label: 'Tentang', href: '/tentang', icon: Info },
 ];
@@ -18,7 +18,7 @@ export function MobileBottomNav() {
   return (
     <nav
       aria-label="Navigasi Bawah"
-      className="fixed bottom-0 left-0 right-0 z-40 block border-t border-border bg-surface/95 backdrop-blur-md md:hidden shadow-none"
+      className="fixed bottom-0 left-0 right-0 z-40 block bg-white/95 backdrop-blur-md md:hidden shadow-none"
     >
       <div className="mx-auto flex h-14 max-w-lg items-center justify-around px-2">
         {navItems.map((item) => {
@@ -29,7 +29,7 @@ export function MobileBottomNav() {
             <Link
               key={item.href}
               href={item.href}
-              className={`flex flex-col items-center justify-center py-1 px-3 min-w-[56px] min-h-[40px] transition-colors rounded-lg ${
+              className={`flex flex-col items-center justify-center py-1 px-3 min-w-[56px] min-h-[40px] transition-colors rounded-xl ${
                 isActive
                   ? 'text-primary font-medium'
                   : 'text-text-muted hover:text-text-primary'
@@ -42,7 +42,7 @@ export function MobileBottomNav() {
               >
                 <Icon
                   className={`h-4 w-4 ${
-                    isActive ? 'text-primary' : 'text-text-secondary'
+                    isActive ? 'text-primary' : 'text-text-muted'
                   }`}
                   strokeWidth={1.5}
                 />

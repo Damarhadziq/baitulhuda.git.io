@@ -2,9 +2,7 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {
@@ -17,17 +15,18 @@ const config: Config = {
         },
         surface: {
           DEFAULT: '#FFFFFF',
-          subtle: '#F4F4F0',
+          subtle: '#F6F8F6',
+          muted: '#F0F3F0',
         },
-        background: '#FBFBF9',
+        background: '#FFFFFF',
         text: {
           primary: '#1E2421',
           secondary: '#5C6560',
           muted: '#8C9690',
         },
         border: {
-          DEFAULT: '#E5E8E4',
-          subtle: '#EEF0EC',
+          DEFAULT: 'transparent',
+          subtle: 'transparent',
         },
         accent: {
           gold: '#D4A373',
