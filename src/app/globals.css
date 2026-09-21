@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #FBFBF9;
+    --surface: #FFFFFF;
+    --surface-subtle: #F4F4F0;
+    --primary: #2D6A4F;
+    --primary-pastel: #E8F0EB;
+    --primary-hover: #24553F;
+    --text-primary: #1E2421;
+    --text-secondary: #5C6560;
+    --text-muted: #8C9690;
+    --border: #E5E8E4;
+    --accent-gold: #D4A373;
+    --destructive: #C85A54;
+  }
+
+  /* Strict Zero Elevation Rule: Eradicate all box shadows across all elements */
+  *,
+  *::before,
+  *::after {
+    box-shadow: none !important;
+    border-color: var(--border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    letter-spacing: 0em;
+    min-height: 100vh;
+    font-weight: 400;
+  }
+
+  /* Strict Typography: Max font-weight is 600 (semibold). No bold / 700+ allowed. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-commissioner), system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+}
+
+/* Delicate, hygienic scrollbar without chunky thumb */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FBFBF9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E8E4;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D0D6CF;
+}
+
+/* Subtle selection highlight */
+::selection {
+  background-color: #E8F0EB;
+  color: #2D6A4F;
+}
