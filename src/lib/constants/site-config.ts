@@ -31,15 +31,16 @@ export const siteConfig = {
     accountHolder: 'DKM Masjid Baitul Huda',
     qrisPlaceholderUrl: '/images/qris-baitul-huda.png',
   },
-  // STRICT ONLY 4 NAVIGATION ITEMS
   navigation: [
     { label: 'Beranda', href: '/' },
+    { label: 'Kegiatan', href: '/warta' },
     { label: 'UMKM', href: '/umkm' },
     { label: 'Transparansi Kas', href: '/transparansi-kas' },
     { label: 'Tentang Kami', href: '/tentang' },
   ],
   mobileNav: [
     { label: 'Beranda', href: '/', icon: 'Home' },
+    { label: 'Kegiatan', href: '/warta', icon: 'Calendar' },
     { label: 'UMKM', href: '/umkm', icon: 'Store' },
     { label: 'Kas', href: '/transparansi-kas', icon: 'Wallet' },
     { label: 'Tentang', href: '/tentang', icon: 'Info' },

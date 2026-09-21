@@ -6,12 +6,11 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/lib/constants/site-config';
 import { Button } from '@/components/ui/button';
-import { getWhatsAppUrl } from '@/lib/utils';
 import {
   Compass,
-  MessageCircle,
   Menu,
   X,
+  ScanLine,
   QrCode,
 } from 'lucide-react';
 import {
@@ -26,28 +25,32 @@ export function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [qrisOpen, setQrisOpen] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
 
-  const waUrl = getWhatsAppUrl(
-    siteConfig.contacts.whatsappDkm,
-    'Assalamu’alaikum DKM Masjid Baitul Huda, saya ingin bertanya mengenai layanan masjid.'
-  );
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md shadow-none">
-        {/* Top micro-bar for date & calmness reminder */}
+      <header
+        className={`sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md transition-colors duration-200 ${
+          isScrolled ? 'border-b border-[#ececec]' : 'border-b border-transparent'
+        }`}
+      >
+        {/* Top micro-bar: Left = Arah Kiblat, Right = Kota Semarang */}
         <div className="hidden bg-surface-subtle/70 py-1.5 px-4 text-xs text-text-secondary sm:block">
           <div className="mx-auto flex max-w-6xl items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="font-normal text-xs">{siteConfig.motto}</span>
+            <div className="flex items-center gap-1.5 text-text-secondary">
+              <Compass className="h-3.5 w-3.5 text-accent-gold" />
+              <span className="font-normal text-xs">Arah Kiblat: 294.8° Barat Laut</span>
             </div>
-            <div className="flex items-center gap-4 text-text-muted">
-              <span className="flex items-center gap-1.5">
-                <Compass className="h-3 w-3 text-accent-gold" />
-                <span className="font-normal text-xs">Arah Kiblat: 294.8° Barat Laut</span>
-              </span>
-              <span className="text-text-muted/40">•</span>
+            <div className="text-text-muted">
               <span className="font-normal text-xs">{siteConfig.address.city}</span>
             </div>
           </div>
@@ -72,18 +75,18 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation Links - STRICTLY ONLY 4 ITEMS */}
-          <nav className="hidden md:flex items-center gap-1">
+          {/* Desktop Navigation Links - STRICTLY ONLY 4 ITEMS, Active = Text Primary Only */}
+          <nav className="hidden md:flex items-center gap-6">
             {siteConfig.navigation.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`rounded-full px-4 py-1.5 text-sm transition-all ${
+                  className={`py-1 text-sm transition-colors ${
                     isActive
-                      ? 'bg-primary-pastel text-primary font-medium'
-                      : 'text-text-muted hover:text-text-primary hover:bg-surface-subtle font-normal'
+                      ? 'text-primary font-medium'
+                      : 'text-text-secondary hover:text-text-primary font-normal'
                   }`}
                 >
                   {item.label}
@@ -92,28 +95,16 @@ export function Navbar() {
             })}
           </nav>
 
-          {/* Right CTA Actions */}
+          {/* Right CTA Action: Scan Infaq Only */}
           <div className="flex items-center gap-2">
-            <Button
-              asChild
-              variant="outline"
-              size="sm"
-              className="hidden sm:inline-flex text-xs font-medium"
-            >
-              <a href={waUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-3.5 w-3.5 text-primary" />
-                <span>Layanan DKM</span>
-              </a>
-            </Button>
-
             <Button
               variant="default"
               size="sm"
               onClick={() => setQrisOpen(true)}
-              className="inline-flex text-xs font-medium"
+              className="inline-flex text-xs font-medium rounded-lg px-3.5"
             >
-              <QrCode className="h-3.5 w-3.5 mr-1" />
-              <span>Infaq QRIS</span>
+              <ScanLine className="h-3.5 w-3.5 mr-1.5" />
+              <span>Scan Infaq</span>
             </Button>
 
             {/* Mobile hamburger button */}
@@ -143,10 +134,10 @@ export function Navbar() {
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`rounded-xl px-3.5 py-2 text-sm transition-colors ${
+                    className={`px-3 py-2 text-sm transition-colors ${
                       isActive
-                        ? 'bg-primary-pastel text-primary font-medium'
-                        : 'text-text-muted hover:text-text-primary hover:bg-surface-subtle font-normal'
+                        ? 'text-primary font-medium'
+                        : 'text-text-secondary hover:text-text-primary font-normal'
                     }`}
                   >
                     {item.label}
@@ -155,11 +146,17 @@ export function Navbar() {
               })}
             </nav>
             <div className="mt-4 pt-3 flex flex-col gap-2">
-              <Button asChild variant="outline" size="mobile" className="w-full justify-center">
-                <a href={waUrl} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-4 w-4 text-primary mr-1.5" />
-                  <span>Hubungi DKM via WhatsApp</span>
-                </a>
+              <Button
+                variant="default"
+                size="mobile"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setQrisOpen(true);
+                }}
+                className="w-full justify-center text-xs font-medium rounded-lg"
+              >
+                <ScanLine className="h-4 w-4 mr-1.5" />
+                <span>Scan Infaq</span>
               </Button>
             </div>
           </div>

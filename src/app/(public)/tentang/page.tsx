@@ -224,7 +224,7 @@ export default function TentangPage() {
               className="rounded-2xl bg-surface-subtle/70 p-5 flex flex-col justify-between space-y-3"
             >
               <div>
-                <span className="text-[11px] font-semibold text-primary uppercase tracking-wider block">
+                <span className="text-xs font-semibold text-primary tracking-normal block">
                   {item.role}
                 </span>
                 <p className="font-semibold text-sm text-text-primary mt-1">

@@ -130,7 +130,7 @@ export default function TvDisplayPage() {
               }`}
             >
               <span
-                className={`text-sm font-semibold uppercase tracking-wider ${
+                className={`text-sm font-semibold tracking-normal ${
                   isNext ? 'text-primary-pastel' : 'text-text-muted'
                 }`}
               >

@@ -68,6 +68,22 @@ const tasks: VolunteerTask[] = [
     schedule: 'Pekan terakhir setiap bulan',
     description: 'Membantu pendataan penerima santunan dan pendistribusian paket bantuan langsung ke rumah warga lansia.',
   },
+  {
+    id: 'lansia',
+    title: 'Pendampingan Jamaah Lansia & Musafir',
+    category: 'Pelayanan Jamaah',
+    needed: 'Dibutuhkan 2 orang',
+    schedule: 'Sholat Jum’at & Agenda Warga',
+    description: 'Menyambut dan membantu akses kursi roda, tempat wudhu khusus, serta transit kenyamanan musafir.',
+  },
+  {
+    id: 'literasi',
+    title: 'Pengelolaan Perpustakaan & Kitab Masjid',
+    category: 'Pendidikan & Literasi',
+    needed: 'Dibutuhkan 1 orang',
+    schedule: 'Ahad Siang (Berkala)',
+    description: 'Merawat kerapian koleksi mushaf Al-Qur’an, buku bacaan islami warga, dan penataan kitab kajian.',
+  },
 ];
 
 export function VolunteerSection() {
@@ -115,43 +131,43 @@ export function VolunteerSection() {
         </p>
       </div>
 
-      {/* 3 Mini Stat Cards */}
+      {/* 3 Mini Stat Cards: White background with #ececec border and less-rounded icon */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-white border border-[#ececec] p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Relawan Aktif</span>
             <p className="font-semibold text-lg text-primary mt-0.5">28 Relawan</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white border border-[#ececec] text-primary">
             <Users className="h-4 w-4" />
           </div>
         </div>
 
-        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-white border border-[#ececec] p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Tugas Terpenuhi</span>
             <p className="font-semibold text-lg text-primary mt-0.5">14 Amanah</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white border border-[#ececec] text-primary">
             <CheckCircle2 className="h-4 w-4" />
           </div>
         </div>
 
-        <div className="rounded-2xl bg-surface-subtle/70 p-4 flex items-center justify-between">
+        <div className="rounded-2xl bg-white border border-[#ececec] p-4 flex items-center justify-between">
           <div>
             <span className="text-xs text-text-muted font-normal">Kebutuhan Terbuka</span>
-            <p className="font-semibold text-lg text-primary mt-0.5">4 Posisi</p>
+            <p className="font-semibold text-lg text-primary mt-0.5">6 Posisi</p>
           </div>
-          <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-white border border-[#ececec] text-primary">
             <HeartHandshake className="h-4 w-4" />
           </div>
         </div>
       </div>
 
-      {/* Grid of Volunteer Tasks */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      {/* Grid of Volunteer Tasks - STRICT 3 COLUMNS PER ROW, White BG + #ececec border */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tasks.map((task) => (
-          <Card key={task.id} className="flex flex-col justify-between">
+          <Card key={task.id} className="flex flex-col justify-between bg-white border border-[#ececec] rounded-2xl">
             <div>
               <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">

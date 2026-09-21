@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { formatRupiah } from '@/lib/utils';
@@ -14,80 +13,133 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { Wallet, QrCode, ArrowRight, ShieldCheck, ArrowDownRight, ArrowUpRight } from 'lucide-react';
+import {
+  ScanLine,
+  ArrowRight,
+  ShieldCheck,
+  TrendingUp,
+  ArrowDownLeft,
+  ArrowUpRight,
+  Receipt,
+  QrCode,
+} from 'lucide-react';
 
 export function TreasuryTeaser() {
   const [qrisOpen, setQrisOpen] = React.useState(false);
 
   return (
     <section aria-labelledby="transparansi-teaser-heading" className="space-y-4">
-      <div className="rounded-3xl bg-surface-subtle/70 p-6 sm:p-8 shadow-none">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-          {/* Left Summary Info */}
-          <div className="space-y-2 max-w-xl">
+      <div className="rounded-2xl bg-surface-subtle/70 p-6 sm:p-8 shadow-none space-y-6">
+        {/* Header: Accounting & Governance Title */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-primary-pastel text-primary">
-                <Wallet className="h-4 w-4" />
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-pastel text-primary">
+                <Receipt className="h-4 w-4" />
               </div>
               <h2
                 id="transparansi-teaser-heading"
                 className="font-heading font-semibold text-lg sm:text-xl text-text-primary tracking-tight"
               >
-                Transparansi Kas & Infaq Cepat
+                Transparansi Pembukuan Kas & Infaq
               </h2>
-              <Badge variant="gold" className="text-[10px] font-medium">
-                Amanah Umat
+              <Badge variant="default" className="text-[10px] font-medium rounded-lg">
+                <ShieldCheck className="h-3 w-3 mr-1 text-primary" />
+                <span>Terverifikasi DKM</span>
               </Badge>
             </div>
             <p className="text-xs sm:text-sm text-text-secondary leading-relaxed font-normal">
-              Seluruh dana infaq kotak sholat Jum’at, transfer perbankan, dan QRIS dipublikasikan secara terbuka untuk pemeliharaan fasilitas ibadah dan santunan dhuafa.
+              Pencatatan mutasi kas riil secara terbuka demi menjaga amanah sedekah, infaq Jumat, dan infaq digital jamaah.
             </p>
           </div>
 
-          {/* Center/Right: Balance and Action */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2 lg:pt-0">
-            <div className="space-y-0.5">
-              <span className="text-xs text-text-muted font-normal">Saldo Kas Aktif Berjalan:</span>
-              <p className="font-mono text-2xl font-semibold text-primary">
-                {formatRupiah(24850000)}
-              </p>
-              <span className="text-[11px] text-text-muted font-normal block">
-                Pembaruan per 21 September 2026
-              </span>
-            </div>
+          <Button
+            variant="default"
+            size="default"
+            onClick={() => setQrisOpen(true)}
+            className="text-xs font-medium self-start sm:self-auto rounded-lg px-4"
+          >
+            <ScanLine className="h-4 w-4 mr-1.5" />
+            <span>Scan Infaq</span>
+          </Button>
+        </div>
 
-            <Button
-              variant="default"
-              size="default"
-              onClick={() => setQrisOpen(true)}
-              className="text-xs font-medium self-stretch sm:self-auto rounded-full px-5"
-            >
-              <QrCode className="h-3.5 w-3.5 mr-1.5" />
-              <span>Infaq QRIS</span>
-            </Button>
+        {/* 4 Economic Ledger Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+          {/* Card 1: Saldo Kas Berjalan */}
+          <div className="rounded-xl bg-white p-4 space-y-1 shadow-none">
+            <span className="text-[11px] text-text-muted font-normal block">
+              Saldo Kas Aktif (Likuid)
+            </span>
+            <p className="font-mono text-xl sm:text-2xl font-semibold text-primary">
+              {formatRupiah(24850000)}
+            </p>
+            <span className="text-[10px] text-text-secondary font-normal block">
+              Per 21-09-2026 • Rekening BSI & Tunai
+            </span>
+          </div>
+
+          {/* Card 2: Penerimaan (Debits) */}
+          <div className="rounded-xl bg-white p-4 space-y-1 shadow-none">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] text-text-muted font-normal">
+                Penerimaan Bulan Ini
+              </span>
+              <ArrowDownLeft className="h-3.5 w-3.5 text-primary" />
+            </div>
+            <p className="font-mono text-lg sm:text-xl font-semibold text-primary">
+              +{formatRupiah(8450000)}
+            </p>
+            <span className="text-[10px] text-text-secondary font-normal block">
+              Infaq Kotak, QRIS, & Transfer
+            </span>
+          </div>
+
+          {/* Card 3: Realisasi Belanja (Credits) */}
+          <div className="rounded-xl bg-white p-4 space-y-1 shadow-none">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] text-text-muted font-normal">
+                Pengeluaran Operasional
+              </span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-destructive" />
+            </div>
+            <p className="font-mono text-lg sm:text-xl font-semibold text-destructive">
+              -{formatRupiah(3420000)}
+            </p>
+            <span className="text-[10px] text-text-secondary font-normal block">
+              Listrik, Kebersihan, & Perawatan
+            </span>
+          </div>
+
+          {/* Card 4: Surplus Berjalan */}
+          <div className="rounded-xl bg-white p-4 space-y-1 shadow-none">
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] text-text-muted font-normal">
+                Surplus Bersih Berjalan
+              </span>
+              <TrendingUp className="h-3.5 w-3.5 text-primary" />
+            </div>
+            <p className="font-mono text-lg sm:text-xl font-semibold text-primary">
+              +{formatRupiah(5030000)}
+            </p>
+            <span className="text-[10px] text-text-secondary font-normal block">
+              Rasio Keuangan Sehat 100%
+            </span>
           </div>
         </div>
 
-        {/* Clean Link to Full Report */}
-        <div className="mt-6 pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs">
-          <div className="flex items-center gap-4 text-text-secondary font-normal">
-            <span className="flex items-center gap-1">
-              <ArrowDownRight className="h-3.5 w-3.5 text-primary" />
-              <span>Penerimaan Bulan Ini: <strong>{formatRupiah(8450000)}</strong></span>
-            </span>
-            <span className="text-text-muted/40">•</span>
-            <span className="flex items-center gap-1">
-              <ArrowUpRight className="h-3.5 w-3.5 text-destructive" />
-              <span>Pengeluaran: <strong>{formatRupiah(3420000)}</strong></span>
-            </span>
-          </div>
+        {/* Footer Navigation Link */}
+        <div className="pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-xs">
+          <span className="text-text-secondary font-normal">
+            Buku kas ditutup setiap akhir pekan oleh Bendahara DKM dan dipublikasikan transparan.
+          </span>
 
           <Link
             href="/transparansi-kas"
-            className="inline-flex items-center gap-1 font-medium text-primary hover:underline hover:text-primary-hover transition-colors"
+            className="inline-flex items-center gap-1.5 font-medium text-primary hover:text-primary-hover hover:underline transition-colors"
           >
-            <span>Lihat laporan mutasi dan pembukuan kas lengkap</span>
-            <ArrowRight className="h-3 w-3" />
+            <span>Buka Laporan Neraca & Mutasi Lengkap</span>
+            <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </div>
       </div>
@@ -100,7 +152,7 @@ export function TreasuryTeaser() {
               QRIS Resmi Masjid Baitul Huda
             </DialogTitle>
             <DialogDescription className="text-xs text-text-secondary">
-              Scan barcode di bawah menggunakan aplikasi perbankan digital atau e-wallet apa pun.
+              Scan barcode di bawah menggunakan aplikasi perbankan digital atau dompet digital nasional.
             </DialogDescription>
           </DialogHeader>
 

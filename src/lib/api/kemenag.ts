@@ -18,7 +18,7 @@ function getFallbackPrayerSchedule(date: Date): DailyPrayerSchedule {
   const dateStr = `${yyyy}-${mm}-${dd}`;
 
   return {
-    tanggal: `${dd}/${mm}/${yyyy}`,
+    tanggal: `${dd}-${mm}-${yyyy}`,
     date: dateStr,
     imsak: '04:15',
     subuh: '04:25',
@@ -65,7 +65,7 @@ export async function getPrayerSchedule(
       if (json?.status && json?.data?.jadwal) {
         const j = json.data.jadwal;
         const schedule: DailyPrayerSchedule = {
-          tanggal: j.tanggal || `${dd}/${mm}/${yyyy}`,
+          tanggal: j.tanggal?.replace(/\//g, '-') || `${dd}-${mm}-${yyyy}`,
           date: j.date || `${yyyy}-${mm}-${dd}`,
           imsak: normalizePrayerTime(j.imsak),
           subuh: normalizePrayerTime(j.subuh),
@@ -102,7 +102,7 @@ export async function getPrayerSchedule(
       const timings = json?.data?.timings;
       if (timings) {
         const schedule: DailyPrayerSchedule = {
-          tanggal: `${dd}/${mm}/${yyyy}`,
+          tanggal: `${dd}-${mm}-${yyyy}`,
           date: `${yyyy}-${mm}-${dd}`,
           imsak: normalizePrayerTime(timings.Imsak),
           subuh: normalizePrayerTime(timings.Fajr),

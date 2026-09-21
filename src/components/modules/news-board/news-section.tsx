@@ -1,10 +1,9 @@
 'use client';
 
 import * as React from 'react';
+import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import {
   Dialog,
   DialogContent,
@@ -15,7 +14,6 @@ import {
 import { siteConfig } from '@/lib/constants/site-config';
 import { getWhatsAppUrl } from '@/lib/utils';
 import {
-  Volume2,
   Calendar,
   Share2,
   MapPin,
@@ -87,87 +85,31 @@ const mockNews: NewsItemData[] = [
 
 export function NewsSection() {
   const [selectedNews, setSelectedNews] = React.useState<NewsItemData | null>(null);
-  const [activeTab, setActiveTab] = React.useState<string>('semua');
-
-  const urgentPost = mockNews.find((n) => n.isUrgent);
-
-  const filteredNews = React.useMemo(() => {
-    if (activeTab === 'semua') return mockNews;
-    if (activeTab === 'pengumuman') return mockNews.filter((n) => n.category === 'Pengumuman');
-    if (activeTab === 'kajian') return mockNews.filter((n) => n.category === 'Kajian');
-    if (activeTab === 'lelayu') return mockNews.filter((n) => n.category === 'Kabar Duka (Lelayu)');
-    return mockNews;
-  }, [activeTab]);
 
   return (
-    <section aria-labelledby="warta-heading" className="space-y-6">
-      {/* Header Section */}
+    <section id="warta-jamaah" aria-labelledby="warta-heading" className="space-y-6">
+      {/* Header Section without filter tabs */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3">
         <div>
           <h2
             id="warta-heading"
             className="font-heading font-semibold text-xl md:text-2xl text-text-primary tracking-tight"
           >
-            Warta & Kabar Jamaah
+            Warta & Agenda Mingguan
           </h2>
           <p className="mt-1 text-sm text-text-secondary font-normal">
-            Informasi terkini kegiatan taklim, pengumuman warga, dan kabar duka cita kampung.
+            Informasi kegiatan taklim, pengumuman gotong royong, dan kabar duka cita sepekan ini.
           </p>
         </div>
-
-        {/* Category Tabs using shadcn Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-auto">
-          <TabsList>
-            <TabsTrigger value="semua">Semua</TabsTrigger>
-            <TabsTrigger value="pengumuman">Pengumuman</TabsTrigger>
-            <TabsTrigger value="kajian">Kajian</TabsTrigger>
-            <TabsTrigger value="lelayu">Kabar Duka</TabsTrigger>
-          </TabsList>
-        </Tabs>
       </div>
 
-      {/* Urgent Banner (Pinned Post) */}
-      {/* Urgent Banner (Pinned Post) */}
-      {urgentPost && activeTab !== 'kajian' && activeTab !== 'pengumuman' && (
-        <div className="rounded-2xl bg-primary-pastel/60 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-none">
-          <div className="flex items-start sm:items-center gap-3">
-            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-primary text-white">
-              <Volume2 className="h-4 w-4" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="text-xs font-semibold text-primary uppercase tracking-wide">
-                  Pemberitahuan Utama
-                </span>
-                <span className="text-[11px] text-text-secondary font-normal">
-                  {urgentPost.date}
-                </span>
-              </div>
-              <p className="text-sm font-medium text-text-primary mt-0.5">
-                {urgentPost.title} ({urgentPost.address})
-              </p>
-            </div>
-          </div>
-
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setSelectedNews(urgentPost)}
-            className="self-end sm:self-auto text-xs font-medium text-primary hover:bg-white rounded-full px-4"
-          >
-            <span>Rincian Warta</span>
-            <ArrowRight className="h-3 w-3 ml-1" />
-          </Button>
-        </div>
-      )}
-
-      {/* Grid of News Cards (3 Columns Desktop, 1 Mobile) */}
+      {/* Grid of News Cards (3 Columns Desktop, 1 Mobile) - Directly without urgent banner */}
       <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-        {filteredNews.map((item) => {
+        {mockNews.map((item) => {
           const isLelayu = item.category === 'Kabar Duka (Lelayu)';
 
           if (isLelayu) {
-            // Specialized Kabar Duka Card
+            // Specialized Kabar Duka Card: Dark background image, bottom-aligned text
             const waTakziahUrl = getWhatsAppUrl(
               siteConfig.contacts.whatsappDkm,
               `Inna lillahi wa inna ilaihi raji’un. Turut berduka cita atas wafatnya ${item.deceasedName} ${item.binBinti}. Semoga husnul khotimah.`
@@ -176,75 +118,94 @@ export function NewsSection() {
             return (
               <div
                 key={item.id}
-                className="rounded-2xl bg-[#FCF5F5] flex flex-col justify-between p-5"
+                onClick={() => setSelectedNews(item)}
+                className="relative overflow-hidden rounded-2xl flex flex-col justify-end p-5 min-h-[340px] text-white cursor-pointer group shadow-none"
               >
-                <div>
+                {/* Dark Atmospheric Background Image */}
+                <Image
+                  src="/images/kabar-duka-bg.jpg"
+                  alt="Latar Kabar Duka"
+                  fill
+                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                />
+                {/* Dark Vignette Overlay for High Contrast */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-black/40 z-0" />
+
+                {/* Bottom Aligned Content */}
+                <div className="relative z-10 space-y-3">
                   <div className="flex items-center justify-between">
-                    <Badge variant="destructive" className="font-medium text-[11px]">
+                    <Badge variant="destructive" className="font-medium text-[11px] rounded-lg bg-destructive text-white">
                       Lelayu Warga
                     </Badge>
-                    <span className="text-[11px] text-text-muted font-normal">{item.date}</span>
+                    <span className="text-[11px] text-white/70 font-normal">{item.date}</span>
                   </div>
-                  <h3 className="mt-3 text-base font-semibold leading-snug text-text-primary">
-                    {item.deceasedName}
-                  </h3>
-                  <p className="text-xs font-medium text-text-secondary mt-0.5">
-                    {item.binBinti} (Usia {item.age} tahun)
-                  </p>
 
-                  <div className="mt-4 space-y-2 text-xs text-text-secondary font-normal">
+                  <div>
+                    <h3 className="text-base font-semibold leading-snug text-white">
+                      {item.deceasedName}
+                    </h3>
+                    <p className="text-xs font-medium text-white/80 mt-0.5">
+                      {item.binBinti} (Usia {item.age} tahun)
+                    </p>
+                  </div>
+
+                  <div className="space-y-1.5 text-xs text-white/85 font-normal">
                     <p className="flex items-start gap-1.5">
-                      <Clock className="h-3.5 w-3.5 text-destructive flex-shrink-0 mt-0.5" />
+                      <Clock className="h-3.5 w-3.5 text-red-300 flex-shrink-0 mt-0.5" />
                       <span>{item.funeralTime}</span>
                     </p>
                     <p className="flex items-start gap-1.5">
-                      <MapPin className="h-3.5 w-3.5 text-destructive flex-shrink-0 mt-0.5" />
+                      <MapPin className="h-3.5 w-3.5 text-red-300 flex-shrink-0 mt-0.5" />
                       <span>{item.address}</span>
                     </p>
                   </div>
-                </div>
 
-                <div className="pt-4 mt-3 flex items-center justify-between gap-2">
-                  {item.mapUrl && (
+                  <div className="pt-2 flex items-center justify-between gap-2" onClick={(e) => e.stopPropagation()}>
+                    {item.mapUrl && (
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="sm"
+                        className="text-xs font-medium text-white hover:bg-white/20 rounded-lg px-3 bg-white/10 border-0"
+                      >
+                        <a href={item.mapUrl} target="_blank" rel="noopener noreferrer">
+                          <MapPin className="h-3 w-3 mr-1" />
+                          <span>Peta</span>
+                        </a>
+                      </Button>
+                    )}
                     <Button
                       asChild
                       variant="outline"
                       size="sm"
-                      className="text-xs font-medium text-text-secondary hover:text-text-primary rounded-full px-3.5 bg-white/70"
+                      className="text-xs font-medium text-white hover:bg-white/20 flex-1 justify-center rounded-lg px-3 bg-white/10 border-0"
                     >
-                      <a href={item.mapUrl} target="_blank" rel="noopener noreferrer">
-                        <MapPin className="h-3 w-3 mr-1" />
-                        <span>Peta</span>
+                      <a href={waTakziahUrl} target="_blank" rel="noopener noreferrer">
+                        <Share2 className="h-3 w-3 mr-1" />
+                        <span>Kirim Takziah via WA</span>
                       </a>
                     </Button>
-                  )}
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="sm"
-                    className="text-xs font-medium text-destructive hover:bg-white flex-1 justify-center rounded-full px-3.5 bg-white/70"
-                  >
-                    <a href={waTakziahUrl} target="_blank" rel="noopener noreferrer">
-                      <Share2 className="h-3 w-3 mr-1" />
-                      <span>Kirim Takziah via WA</span>
-                    </a>
-                  </Button>
+                  </div>
                 </div>
               </div>
             );
           }
 
-          // Regular News & Kajian Card
+          // Regular News & Kajian Card: Clickable Whole Card, Right-Aligned Button
           return (
-            <div key={item.id} className="rounded-2xl bg-surface-subtle/70 flex flex-col justify-between overflow-hidden">
+            <div
+              key={item.id}
+              onClick={() => setSelectedNews(item)}
+              className="rounded-2xl bg-surface-subtle/70 flex flex-col justify-between overflow-hidden cursor-pointer transition-colors hover:bg-surface-subtle"
+            >
               <div>
                 {/* Thumbnail header */}
-                <div className="h-36 w-full bg-surface-subtle flex items-center justify-center text-text-muted">
+                <div className="h-36 w-full bg-[#EBF0EC] flex items-center justify-center text-text-muted">
                   <BookOpen className="h-7 w-7 text-primary/40" />
                 </div>
                 <div className="p-5 pb-2">
                   <div className="flex items-center justify-between">
-                    <Badge variant={item.category === 'Kajian' ? 'default' : 'subtle'} className="font-medium text-[11px]">
+                    <Badge variant={item.category === 'Kajian' ? 'default' : 'subtle'} className="font-medium text-[11px] rounded-lg">
                       {item.category}
                     </Badge>
                     <span className="text-[11px] text-text-muted font-normal">{item.date}</span>
@@ -258,16 +219,12 @@ export function NewsSection() {
                 </div>
               </div>
 
-              <div className="p-5 pt-0">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSelectedNews(item)}
-                  className="w-full justify-between text-xs font-medium text-primary hover:bg-primary-pastel/60 rounded-full px-3"
-                >
+              {/* Right-Aligned "Baca Selengkapnya" with Icon Together */}
+              <div className="p-5 pt-2 flex justify-end">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary-hover">
                   <span>Baca Selengkapnya</span>
-                  <ArrowRight className="h-3 w-3" />
-                </Button>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </div>
             </div>
           );
@@ -323,7 +280,7 @@ export function NewsSection() {
                 variant="outline"
                 size="sm"
                 onClick={() => setSelectedNews(null)}
-                className="text-xs font-medium rounded-full px-4"
+                className="text-xs font-medium rounded-lg px-4"
               >
                 Tutup Warta
               </Button>

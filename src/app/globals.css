@@ -13,17 +13,16 @@
     --text-primary: #1E2421;
     --text-secondary: #5C6560;
     --text-muted: #8C9690;
-    --border: transparent;
+    --border: #ECECEC;
     --accent-gold: #D4A373;
     --destructive: #C85A54;
   }
 
-  /* Strict Zero Elevation & Borderless Aesthetic: Eradicate box shadows and border lines */
+  /* Strict Zero Elevation: Eradicate box shadows across all elements */
   *,
   *::before,
   *::after {
     box-shadow: none !important;
-    border-color: transparent;
   }
 
   html {
@@ -41,6 +40,20 @@
     letter-spacing: 0em;
     min-height: 100vh;
     font-weight: 400;
+    cursor: default;
+  }
+
+  /* Prevent normal text from showing text-editing I-beam caret */
+  p, h1, h2, h3, h4, h5, h6, span, div, li, td, th {
+    cursor: default;
+  }
+
+  a, button, [role="button"], label {
+    cursor: pointer !important;
+  }
+
+  input, textarea, [contenteditable="true"] {
+    cursor: text !important;
   }
 
   /* Strict Typography: Max font-weight is 600 (semibold). No bold / 700+ allowed. */
