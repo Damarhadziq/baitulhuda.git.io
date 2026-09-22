@@ -119,18 +119,15 @@ export function NewsSection() {
               <div
                 key={item.id}
                 onClick={() => setSelectedNews(item)}
+                style={{
+                  position: 'relative',
+                  isolation: 'isolate',
+                  backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.75) 50%, rgba(0,0,0,0.4) 100%), url('/images/kabar-duka-bg.jpg')`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
                 className="relative overflow-hidden rounded-2xl flex flex-col justify-end p-5 min-h-[340px] text-white cursor-pointer group shadow-none"
               >
-                {/* Dark Atmospheric Background Image */}
-                <Image
-                  src="/images/kabar-duka-bg.jpg"
-                  alt="Latar Kabar Duka"
-                  fill
-                  className="object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                />
-                {/* Dark Vignette Overlay for High Contrast */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/75 to-black/40 z-0" />
-
                 {/* Bottom Aligned Content */}
                 <div className="relative z-10 space-y-3">
                   <div className="flex items-center justify-between">

@@ -62,7 +62,7 @@ export function PrayerWidget({ schedule }: PrayerWidgetProps) {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden rounded-2xl p-6 sm:p-8 shadow-none">
+    <div className="relative w-full overflow-hidden rounded-2xl p-6 sm:p-8 shadow-none" style={{ position: 'relative', isolation: 'isolate' }}>
       {/* Atmospheric Background Image with Deep High-Contrast Overlay */}
       <div className="absolute inset-0 z-0">
         <Image

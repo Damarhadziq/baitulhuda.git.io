@@ -53,7 +53,7 @@ export function HeroWelcome() {
 
           {/* Right Column: Mosque Image */}
           <div className="lg:col-span-5">
-            <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-none">
+            <div className="relative aspect-[4/3] sm:aspect-[16/11] lg:aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-none" style={{ position: 'relative', isolation: 'isolate' }}>
               <Image
                 src="/images/hero-mosque.jpg"
                 alt="Masjid Baitul Huda"
